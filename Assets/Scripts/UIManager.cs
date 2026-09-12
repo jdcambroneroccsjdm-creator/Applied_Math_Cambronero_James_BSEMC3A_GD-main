@@ -14,6 +14,12 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI scoreLabel;
     public TextMeshProUGUI highScoreLabel;
     public TextMeshProUGUI healthLabel;
+    public TextMeshProUGUI damageLabel;
+
+public Color normalDamageColor = Color.white;
+public Color criticalDamageColor = Color.red;
+
+
 
     public Button restartBtn;
 
@@ -71,4 +77,22 @@ public class UIManager : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.Append(gameoverRect.DOScale(Vector3.zero, duration).SetEase(easeType));
     }
+    public void ShowDamage(int damage, bool isCritical)
+{
+    if (damageLabel == null)
+        return;
+
+    damageLabel.text = damage.ToString();
+
+    if (isCritical)
+    {
+        damageLabel.color = criticalDamageColor;
+    }
+    else
+    {
+        damageLabel.color = normalDamageColor;
+    }
+
+    damageLabel.gameObject.SetActive(true);
+}
 }
